@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import "tailwindcss";
+
+
+/* 
+:root {
+  --font-poppins: Poppins, sans-serif;
+} */
+
+
+*{
+  /* margin: 0px;  */
+  /* padding: 0px;  */
+  box-sizing: border-box;
+}
+
+body{
+  /* font-family: "Inter", serif; */
+  /* font-family: 'Poppins', 'sans-serif'; */
+
+  /* font-family: "Inter", serif;
+  font-optical-sizing: auto; */
+  /* font-family: "Poppins", serif !important;
+  /* font-style: normal; */
+  font-family: "Poppins", serif;
+  background: #f1f1f1;
+  font-optical-sizing: auto;
+
+}
+
+
+/* notification bell message color change */
+.MuiBadge-badge {background: #1976d2 !important;}
+/* .MuiBadge-badge {background: #ff5252 !important;} */
+
+/* collapse transition on admin page */
+.ReactCollapse--collapse {
+  transition: height 300ms;
+}
+
+.btn-blue{background: #3872fa !important; color: #fff !important; padding: 8px 20px !important;}
+
+.btn-blue:hover{background: #3067e5 !important;}
+
+/* .dashBoardBoxesSlider .box:hover{box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3); background: #fff;} */
+.dashBoardBoxesSlider .box:hover{background: #fff !important; }
+
