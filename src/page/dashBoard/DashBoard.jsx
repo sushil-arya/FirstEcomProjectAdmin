@@ -1,5 +1,5 @@
 import React from 'react';
-import DashBoardBoxes from '../../components/dashboardBoxes/DashBoardBoxes';
+import DashBoardBoxes from '../../components/dashBoardBoxes/DashBoardBoxes';
 import { FaPlus } from "react-icons/fa";
 import Button from '@mui/material/Button';
 
