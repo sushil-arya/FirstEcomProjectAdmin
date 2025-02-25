@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { IoImages } from "react-icons/io5";
@@ -10,6 +10,7 @@ import { IoBagCheck } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
 import { FaAngleDown } from "react-icons/fa6";
 import {Collapse} from 'react-collapse';
+import { MyContext } from '../../App';
 
 
 const SideBar = () => {
@@ -23,9 +24,12 @@ const SideBar = () => {
     }
     
   }
+
+  const context = useContext(MyContext);
+
   return (
     <>
-      <div className="sidebar fixed top-0 left-0 bg-[#f9f9f9] w-[18%] h-full border-r border-[rgba(0,0,0,0.1)] py-2 px-4">
+      <div className={`sidebar fixed top-0 left-0 bg-[#f9f9f9] ${context.isSideBarOpen===true ? 'w-[18%]' : 'w-[0px] opacity-0'} h-full border-r border-[rgba(0,0,0,0.1)] py-2 px-4 transition-all`}>
           <div className="py-2 w-full">
             <Link to='/'>
               <img src="/img-logo/alawo_logo.webp" alt="admin_logo" className='w-[120px]'/>

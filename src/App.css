@@ -10,8 +10,7 @@
 
 
 *{
-  /* margin: 0px;  */
-  /* padding: 0px;  */
+
   box-sizing: border-box;
 }
 
@@ -38,6 +37,10 @@ body{
 .ReactCollapse--collapse {
   transition: height 300ms;
 }
+  ::-webkit-scrollbar{width: 10px !important; height: 10px !important;}
+  ::-webkit-scrollbar-thumb{background: #ccc !important;}
+  ::-webkit-scrollbar-track {background: #f1f1f1; }
+
 
 .btn-blue{background: #3872fa !important; color: #fff !important; padding: 8px 20px !important;}
 
@@ -46,3 +49,4 @@ body{
 /* .dashBoardBoxesSlider .box:hover{box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3); background: #fff;} */
 .dashBoardBoxesSlider .box:hover{background: #fff !important; }
 
+th.MuiTableCell-root{ background: #efefef !important; padding-top: 5px; padding-bottom: 5px;}
