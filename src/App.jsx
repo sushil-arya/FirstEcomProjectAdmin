@@ -1,10 +1,10 @@
-import React, { createContext, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import DashBoard from './page/dashBoard/DashBoard';
 import Header from './components/header/Header';
 import SideBar from './components/sideBar/SideBar';
-
+import { createContext } from 'react';
 
 const MyContext = createContext();
 
@@ -12,19 +12,21 @@ const App = () => {
 
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
+
   const router = createBrowserRouter ([
     {
       path:"/",
+      exact: true,
       element: (
           <>
-            <section className='main'>
+            <section className="main">
               <Header />
               <div className="contentMain flex">
-                <div className={`overflow-hidden sideBarWrapper ${isSideBarOpen===true ? 'w-[18%]' : 'w-[0px] opacity-0'} transition-all`}>
+                <div className={`overflow-hidden sidebarWrapper ${isSideBarOpen===true ? 'w-[18%]' : 'w-[0px] opacity-0'} transition-all`}>
                   <SideBar />
                 </div>
 
-                <div className={`overflow-hidden contentRight py-4 px-5 ${isSideBarOpen===false ? 'w-[100%]' : 'w-[82%]' } transition-all`}>
+                <div className={`contentRight py-4 px-5 ${isSideBarOpen===false ? 'w-[100%]' : 'w-[82%]' } transition-all`}>
                   <DashBoard />
                 </div>
               </div>
@@ -34,12 +36,19 @@ const App = () => {
     },
 ]);
 
-  const values = {
-    // add your state and methods here
-    isSideBarOpen,
-    setIsSideBarOpen,
 
-  };
+const values = {
+    
+  isSideBarOpen,
+  setIsSideBarOpen,
+};
+
+ 
+  // useEffect(() => {
+
+  //   alert(isToggleSidebar);
+
+  // },[isToggleSidebar]);
 
   return (
     <>
@@ -51,4 +60,4 @@ const App = () => {
 }
 
 export default App;
-export {MyContext};
+export { MyContext };

@@ -17,6 +17,11 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { CiExport } from "react-icons/ci";
+
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const columns = [
@@ -79,8 +84,15 @@ const rows = [
 
 const ProductTable2 = () => {
 
+  const [categoryFilterVal, setcategoryFilterVal] = useState('')
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  // filter event
+  const handleChangeCatFilter = (event) => {
+    setcategoryFilterVal(event.target.value);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -94,1152 +106,1243 @@ const ProductTable2 = () => {
   return (
     <>
         <div className="card my-4 shadow-md sm:rounded-lg md:rounded-md bg-white">
-        {/* product table */}
-          <div className="flex items-center justify-between px-5 py-5">
-              <h2 className="text-[18px] font-[600]">Products Table-2</h2>
-          </div>
+          {/* product table */}
+            <div className="flex items-center justify-between px-5 py-5">
+                <h2 className="text-[18px] font-[600]">Products Table-2</h2>
 
+            {/* <div className="flex">
+                <div className="col w-[25%]">
+                  <h4>Category</h4>
+                  <select className="form-select w-[150px]">
+                    <option value="">Select Category</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="home">Home</option>
+                    <option value="health">Health</option>
+                  </select>
 
+                  <Tooltip title="Add New Product">
+                
+                  <Button variant="contained" color="primary" size="small">
+                      <RiEditLine /> Add New
+                    </Button>
+                  </Tooltip>
+                  <Tooltip title="View All Products">
+                    <Button variant="contained" color="primary" size="small">
+                      <FaRegEye /> View All
+                    </Button>
+                  </Tooltip>
+                    <Tooltip title="Delete Selected Products">
+                      <Button variant="contained" color="secondary" size="small">
+                        <GoTrash /> Delete
+                      </Button>
+                    </Tooltip>
+                </div>
+            </div> */}
 
-          {/* product List */}
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead >
-                <TableRow>
-                  <TableCell>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-                  {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
+            
+
+            </div>
+
+            <div className="flex items-center w-full pl-5 pb-5 gap-5 justify-evenly">
+                <div className="col w-[20%]">
+                  <h4 className='text-[16px] mb-2'>Category By</h4>
+                  <FormControl size="small" className="w-60"> 
+
+                  <Select
+                    labelId="demo-simple-select-standard-label"
+                      id="demo-simple-select-standard"
+                      value={categoryFilterVal}
+                      onChange={handleChangeCatFilter}
                     >
-                      {column.label}
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Watch Boxes</MenuItem>
+                      <MenuItem value={20}>Bangle Boxes</MenuItem>
+                      <MenuItem value={30}>Wallets</MenuItem>
+                      <MenuItem value={40}>Belts</MenuItem>
+                      <MenuItem value={50}>Cheque Books</MenuItem>
+                      <MenuItem value={60}>Watch & Sunglasses Box</MenuItem>
+                      <MenuItem value={60}>Watch & Sweat Belts</MenuItem>
+                    </Select>
+
+                  </FormControl>
+                </div>
+
+                <div className="col w-[20%]">
+                  <h4 className='text-[16px] mb-2'>Sort By</h4>
+                  <FormControl size="small" className="w-60">
+                    <Select
+                      labelId="demo-simple-select-standard-label"
+                      id="demo-simple-select-standard"
+                      value=""
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Price High to Low</MenuItem>
+                      <MenuItem value={20}>Price Low to High</MenuItem>
+                      <MenuItem value={30}>Sales High to Low</MenuItem>
+                      <MenuItem value={40}>Sales Low to High</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+
+                <div className="col w-[25%] ml-auto mt-5 flex items-center gap-3">
+                 <Button className='btn btn-sm !text-[#fff] !bg-green-700 flex items-center ' >
+                   Export
+                 </Button>
+                 <Button className='btn-blue btn-sm'>
+                  Add Product
+                 </Button>
+                </div>
+
+
+            </div>
+
+
+
+
+            {/* product List */}
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead >
+                  <TableRow>
+                    <TableCell>
+                      <Checkbox {...label} size="small" />
                     </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow >
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow >
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
 
 
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
 
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
 
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">786</span> sales
+                          </p>
+                      <ProgressBar value={90} type="success" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">786</span> sales
-                        </p>
-                    <ProgressBar value={90} type="success" />
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
 
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
+                  </TableRow>
 
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
-
-
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
-
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                  <TableRow >
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">786</span> sales
-                        </p>
-                    <ProgressBar value={90} type="success" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                    <Tooltip title="Edit Product" placement="top"> 
-                        <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                        <RiEditLine className="!text-[#888] !text-[25px] "/>
-                        </Button>
-                    </Tooltip>
-
-                    <Tooltip title="View Details" placement="top"> 
-                        <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                        <FaRegEye className="!text-[#888] !text-[25px] "/>
-                        </Button>
-                    </Tooltip>
-
-                    <Tooltip title="Remove Product" placement="top"> 
-                        <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                        <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                        </Button>
-                    </Tooltip>
-                        </div>
-                  </TableCell>
-
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
 
 
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
 
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
 
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">786</span> sales
+                          </p>
+                      <ProgressBar value={90} type="success" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">450</span> sales
-                        </p>
-                    <ProgressBar value={50} type="warning" />
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                      <Tooltip title="Edit Product" placement="top"> 
+                          <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                          <RiEditLine className="!text-[#888] !text-[25px] "/>
+                          </Button>
+                      </Tooltip>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                      <Tooltip title="View Details" placement="top"> 
+                          <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                          <FaRegEye className="!text-[#888] !text-[25px] "/>
+                          </Button>
+                      </Tooltip>
 
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                      <Tooltip title="Remove Product" placement="top"> 
+                          <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                          <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                          </Button>
+                      </Tooltip>
+                          </div>
+                    </TableCell>
 
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
+                  </TableRow>
 
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
-
-
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
-
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                  <TableRow >
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">100</span> sales
-                        </p>
-                    <ProgressBar value={20} type="error" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
-
-                </TableRow>
-
-                <TableRow >
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
 
 
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
 
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
 
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">450</span> sales
+                          </p>
+                      <ProgressBar value={50} type="warning" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">786</span> sales
-                        </p>
-                    <ProgressBar value={90} type="success" />
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
 
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
+                  </TableRow>
 
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
-
-
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
-
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                  <TableRow >
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">450</span> sales
-                        </p>
-                    <ProgressBar value={50} type="warning" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
-
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
 
 
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
 
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
 
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">100</span> sales
+                          </p>
+                      <ProgressBar value={20} type="error" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">450</span> sales
-                        </p>
-                    <ProgressBar value={50} type="warning" />
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
 
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
+                  </TableRow>
 
-                </TableRow>
+                  <TableRow >
 
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
 
-                <TableRow >
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
 
 
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
 
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
 
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">786</span> sales
+                          </p>
+                      <ProgressBar value={90} type="success" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">786</span> sales
-                        </p>
-                    <ProgressBar value={90} type="success" />
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
 
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
+                  </TableRow>
 
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
-
-
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
-
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                  <TableRow >
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">786</span> sales
-                        </p>
-                    <ProgressBar value={90} type="success" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                    <Tooltip title="Edit Product" placement="top"> 
-                        <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                        <RiEditLine className="!text-[#888] !text-[25px] "/>
-                        </Button>
-                    </Tooltip>
-
-                    <Tooltip title="View Details" placement="top"> 
-                        <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                        <FaRegEye className="!text-[#888] !text-[25px] "/>
-                        </Button>
-                    </Tooltip>
-
-                    <Tooltip title="Remove Product" placement="top"> 
-                        <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                        <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                        </Button>
-                    </Tooltip>
-                        </div>
-                  </TableCell>
-
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
 
 
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
 
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
 
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">450</span> sales
+                          </p>
+                      <ProgressBar value={50} type="warning" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">450</span> sales
-                        </p>
-                    <ProgressBar value={50} type="warning" />
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
 
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
+                  </TableRow>
 
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
-
-
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
-
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                  <TableRow >
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">100</span> sales
-                        </p>
-                    <ProgressBar value={20} type="error" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
-
-                </TableRow>
-
-                <TableRow >
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
 
 
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
 
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
 
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">450</span> sales
+                          </p>
+                      <ProgressBar value={50} type="warning" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">786</span> sales
-                        </p>
-                    <ProgressBar value={90} type="success" />
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
 
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
-
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
+                  </TableRow>
 
 
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
+                  <TableRow >
 
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
 
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
+
+
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
+
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">786</span> sales
+                          </p>
+                      <ProgressBar value={90} type="success" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">450</span> sales
-                        </p>
-                    <ProgressBar value={50} type="warning" />
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
 
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
 
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
+                  </TableRow>
 
-                </TableRow>
-
-                <TableRow >
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <Checkbox {...label} size="small" />
-                  </TableCell>
-
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div className="flex items-center gap-4 w-[300px]">
-                        <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                        <Link to='/product/693'> 
-                            <img
-                                className="w-full object-cover group-hover:scale-105 transition-all"
-                                src="/img-products/img-product-3.webp"
-                                alt="Product-thumb-Image"
-                            />
-                            </Link>
-                        </div>
-
-
-                        <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                            <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                <Link to='/product/693'> 
-
-                                Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
-                                </Link>
-                            </h3>
-                            
-                            <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                        </div>
-                    </div>
+                  <TableRow >
                     
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    Watches Boxes
-                  </TableCell>
-                  
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  5 Slots Boxes
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <div class="flex gap-1 flex-col ">
-                      <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                    </div>
-                  </TableCell>
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                    <p className="text-[13px] w-[100px]">
-                    <span className="font-[600]">450</span> sales
-                        </p>
-                    <ProgressBar value={50} type="warning" />
-                  </TableCell>
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
 
-                  <TableCell style={{ minWidth: columns.minWidth }}>
-                  <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
 
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
 
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                  </TableCell>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
 
-                </TableRow>
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
 
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">786</span> sales
+                          </p>
+                      <ProgressBar value={90} type="success" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                      <Tooltip title="Edit Product" placement="top"> 
+                          <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                          <RiEditLine className="!text-[#888] !text-[25px] "/>
+                          </Button>
+                      </Tooltip>
+
+                      <Tooltip title="View Details" placement="top"> 
+                          <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                          <FaRegEye className="!text-[#888] !text-[25px] "/>
+                          </Button>
+                      </Tooltip>
+
+                      <Tooltip title="Remove Product" placement="top"> 
+                          <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                          <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                          </Button>
+                      </Tooltip>
+                          </div>
+                    </TableCell>
+
+                  </TableRow>
+
+                  <TableRow >
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
+
+
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
+
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">450</span> sales
+                          </p>
+                      <ProgressBar value={50} type="warning" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
+
+                  </TableRow>
+
+                  <TableRow >
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
+
+
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
+
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">100</span> sales
+                          </p>
+                      <ProgressBar value={20} type="error" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
+
+                  </TableRow>
+
+                  <TableRow >
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
+
+
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
+
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">786</span> sales
+                          </p>
+                      <ProgressBar value={90} type="success" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
+
+                  </TableRow>
+
+                  <TableRow >
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
+
+
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
+
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">450</span> sales
+                          </p>
+                      <ProgressBar value={50} type="warning" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
+
+                  </TableRow>
+
+                  <TableRow >
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <Checkbox {...label} size="small" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div className="flex items-center gap-4 w-[300px]">
+                          <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                          <Link to='/product/693'> 
+                              <img
+                                  className="w-full object-cover group-hover:scale-105 transition-all"
+                                  src="/img-products/img-product-3.webp"
+                                  alt="Product-thumb-Image"
+                              />
+                              </Link>
+                          </div>
+
+
+                          <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                              <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                  <Link to='/product/693'> 
+
+                                  Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                  </Link>
+                              </h3>
+                              
+                              <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                          </div>
+                      </div>
+                      
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      Watches Boxes
+                    </TableCell>
+                    
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    5 Slots Boxes
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <div class="flex gap-1 flex-col ">
+                        <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                      </div>
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                      <p className="text-[13px] w-[100px]">
+                      <span className="font-[600]">450</span> sales
+                          </p>
+                      <ProgressBar value={50} type="warning" />
+                    </TableCell>
+
+                    <TableCell style={{ minWidth: columns.minWidth }}>
+                    <div className="flex items-center gap-2">
+                              <Tooltip title="Edit Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="View Details" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+
+                              <Tooltip title="Remove Product" placement="top"> 
+                                  <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                  <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                  </Button>
+                              </Tooltip>
+                          </div>
+                    </TableCell>
+
+                  </TableRow>
+
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
         </div>
     </>
 );

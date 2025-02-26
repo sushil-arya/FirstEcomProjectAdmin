@@ -15,11 +15,26 @@ import Pagination from '@mui/material/Pagination';
 import Tooltip from '@mui/material/Tooltip';
 import ProductTable2 from "../../components/productTable2/ProductTable2";
 
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { CiExport } from "react-icons/ci";
+
+import LineChartGraph from "../../components/lineChartGraph/LineChartGraph";
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
 const DashBoard = () => {
+
+      const [categoryFilterVal, setcategoryFilterVal] = useState('')
+    
+      // filter event
+      const handleChangeCatFilter = (event) => {
+        setcategoryFilterVal(event.target.value);
+      };
+
   const [isOpenOrderedProduct, setIsOpenOrderedProduct] = useState(false);
 
   const isShowOrderedProduct = (index) => {
@@ -33,26 +48,26 @@ const DashBoard = () => {
   return (
     <>
         <div className="w-full bg-[#f1faff] py-2 px-5 border border-[rgba(0,0,0,0.1)] flex items-center gap-8 mb-5 justify-between rounded-lg shadow-md">
-        <div className="info">
-            <h1 className="text-[35px] font-bold leading-12">
-            Good Morning, <br />
-            Admin
-            </h1>
-            <p>
-            Here's What happening on your store today. See the statistics at
-            once.
-            </p>
-            <br />
-            <Button className="btn-blue !capitalize flex gap-2">
-            <FaPlus /> Add Product
-            </Button>
-        </div>
+            <div className="info">
+                <h1 className="text-[35px] font-bold leading-12">
+                Good Morning, <br />
+                Admin
+                </h1>
+                <p>
+                Here's What happening on your store today. See the statistics at
+                once.
+                </p>
+                <br />
+                <Button className="btn-blue !capitalize flex gap-2">
+                <FaPlus /> Add Product
+                </Button>
+            </div>
 
-        <img
-            src="/img-shop/shop-illustration.webp"
-            alt="admin-dashboardImage"
-            className="w-[250px]"
-        />
+            <img
+                src="/img-shop/shop-illustration.webp"
+                alt="admin-dashboardImage"
+                className="w-[250px]"
+            />
         </div>
         <DashBoardBoxes />
 
@@ -62,126 +77,126 @@ const DashBoard = () => {
                 <h2 className="text-[18px] font-[600]">Recent Orders</h2>
             </div>
 
-    {/* <div class="relative overflow-x-auto ">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-            <th scope="col" class="px-6 py-3">
-                order id
-            </th>
-            <th scope="col" class="px-6 py-3">
-                customer
-            </th>
-            <th scope="col" class="px-6 py-3">
-                itmes
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Price
-            </th>
-            <th scope="col" class="px-6 py-3">
-                created
-            </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-            <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-                Apple MacBook Pro 17"
-            </th>
-            <td class="px-6 py-4">Silver</td>
-            <td class="px-6 py-4">Laptop</td>
-            <td class="px-6 py-4">&#8377; 2999</td>
-            <td class="px-6 py-4">
-                <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                Edit
-                </a>
-            </td>
-            </tr>
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-            <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-                Microsoft Surface Pro
-            </th>
-            <td class="px-6 py-4">White</td>
-            <td class="px-6 py-4">Laptop PC</td>
-            <td class="px-6 py-4">&#8377; 1999</td>
-            <td class="px-6 py-4">
-                <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                Edit
-                </a>
-            </td>
-            </tr>
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-            <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-                Magic Mouse 2
-            </th>
-            <td class="px-6 py-4">Black</td>
-            <td class="px-6 py-4">Accessories</td>
-            <td class="px-6 py-4">&#8377; 99</td>
-            <td class="px-6 py-4">
-                <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                Edit
-                </a>
-            </td>
-            </tr>
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-            <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-                Google Pixel Phone
-            </th>
-            <td class="px-6 py-4">Gray</td>
-            <td class="px-6 py-4">Phone</td>
-            <td class="px-6 py-4">&#8377; 799</td>
-            <td class="px-6 py-4">
-                <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                Edit
-                </a>
-            </td>
-            </tr>
-            <tr>
-            <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-                Apple Watch 5
-            </th>
-            <td class="px-6 py-4">Red</td>
-            <td class="px-6 py-4">Wearables</td>
-            <td class="px-6 py-4">&#8377; 999</td>
-            <td class="px-6 py-4">
-                <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                Edit
-                </a>
-            </td>
-            </tr>
-        </tbody>
-        </table>
-    </div> */}
+                {/* <div class="relative overflow-x-auto ">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                        <th scope="col" class="px-6 py-3">
+                            order id
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            customer
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            itmes
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Price
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            created
+                        </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                            Apple MacBook Pro 17"
+                        </th>
+                        <td class="px-6 py-4">Silver</td>
+                        <td class="px-6 py-4">Laptop</td>
+                        <td class="px-6 py-4">&#8377; 2999</td>
+                        <td class="px-6 py-4">
+                            <a
+                            href="#"
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                            >
+                            Edit
+                            </a>
+                        </td>
+                        </tr>
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                            Microsoft Surface Pro
+                        </th>
+                        <td class="px-6 py-4">White</td>
+                        <td class="px-6 py-4">Laptop PC</td>
+                        <td class="px-6 py-4">&#8377; 1999</td>
+                        <td class="px-6 py-4">
+                            <a
+                            href="#"
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                            >
+                            Edit
+                            </a>
+                        </td>
+                        </tr>
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                            Magic Mouse 2
+                        </th>
+                        <td class="px-6 py-4">Black</td>
+                        <td class="px-6 py-4">Accessories</td>
+                        <td class="px-6 py-4">&#8377; 99</td>
+                        <td class="px-6 py-4">
+                            <a
+                            href="#"
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                            >
+                            Edit
+                            </a>
+                        </td>
+                        </tr>
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                            Google Pixel Phone
+                        </th>
+                        <td class="px-6 py-4">Gray</td>
+                        <td class="px-6 py-4">Phone</td>
+                        <td class="px-6 py-4">&#8377; 799</td>
+                        <td class="px-6 py-4">
+                            <a
+                            href="#"
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                            >
+                            Edit
+                            </a>
+                        </td>
+                        </tr>
+                        <tr>
+                        <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                            Apple Watch 5
+                        </th>
+                        <td class="px-6 py-4">Red</td>
+                        <td class="px-6 py-4">Wearables</td>
+                        <td class="px-6 py-4">&#8377; 999</td>
+                        <td class="px-6 py-4">
+                            <a
+                            href="#"
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                            >
+                            Edit
+                            </a>
+                        </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div> */}
 
             {/* Recent Order table List */}
             <div className="relative overflow-x-auto mt-5 pb-5">
@@ -1033,467 +1048,527 @@ const DashBoard = () => {
 
 
         <div className="card my-4 shadow-md sm:rounded-lg md:rounded-md bg-white">
-        {/* product table */}
-        <div className="flex items-center justify-between px-5 py-5">
-            <h2 className="text-[18px] font-[600]">Products</h2>
-        </div>
+            {/* product table */}
+            <div className="flex items-center justify-between px-5 py-5">
+                <h2 className="text-[18px] font-[600]">Products-1</h2>
 
+                
+            </div>
 
+            <div className="flex items-center w-full pl-5 pb-5 gap-5 justify-evenly">
+                <div className="col w-[20%]">
+                  <h4 className='text-[16px] mb-2'>Category By</h4>
+                  <FormControl size="small" className="w-60"> 
 
-        {/* product List */}
-        <div className="relative overflow-x-auto mt-5 pb-5 ">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                <th scope="col" class="px-6 pr-0 py-3" >
-                <div className="w-[60px]">
-                    <Checkbox {...label} size="small"/>
+                  <Select
+                    labelId="demo-simple-select-standard-label"
+                      id="demo-simple-select-standard"
+                      value={categoryFilterVal}
+                      onChange={handleChangeCatFilter}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Watch Boxes</MenuItem>
+                      <MenuItem value={20}>Bangle Boxes</MenuItem>
+                      <MenuItem value={30}>Wallets</MenuItem>
+                      <MenuItem value={40}>Belts</MenuItem>
+                      <MenuItem value={50}>Cheque Books</MenuItem>
+                      <MenuItem value={60}>Watch & Sunglasses Box</MenuItem>
+                      <MenuItem value={60}>Watch & Sweat Belts</MenuItem>
+                    </Select>
+
+                  </FormControl>
                 </div>
-                </th>
-                <th scope="col" class="px-2 py-3 whitespace-nowrap">
-                    Product
-                </th>
-                <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                    Category
-                </th>
 
-                <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                    Sub Category
-                </th>
+                <div className="col w-[20%]">
+                  <h4 className='text-[16px] mb-2'>Sort By</h4>
+                  <FormControl size="small" className="w-60">
+                    <Select
+                      labelId="demo-simple-select-standard-label"
+                      id="demo-simple-select-standard"
+                      value=""
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Price High to Low</MenuItem>
+                      <MenuItem value={20}>Price Low to High</MenuItem>
+                      <MenuItem value={30}>Sales High to Low</MenuItem>
+                      <MenuItem value={40}>Sales Low to High</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
 
-                <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                    Price
-                </th>
+                <div className="col w-[25%] ml-auto mt-5 flex items-center gap-3">
+                 <Button className='btn btn-sm !text-[#fff] !bg-green-700 flex items-center ' >
+                   Export
+                 </Button>
+                 <Button className='btn-blue btn-sm'>
+                  Add Product
+                 </Button>
+                </div>
 
-                <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                    Sales
-                </th>
-
-                <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                    Action
-                </th>
-
-            </tr>
-            </thead>
-            <tbody>
-
-                <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                    <td className="px-6 pr-2 py-2">
-                        <div className="w-[60px]">
-                            <Checkbox {...label} size="small"/>
-                        </div>
-                    </td>
-
-                    <td className="px-2 py-2">
-                        <div className="flex items-center gap-4 w-[300px]">
-                            <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                            <Link to='/product/693'> 
-                                <img
-                                    className="w-full object-cover group-hover:scale-105 transition-all"
-                                    src="/img-products/img-product-3.webp"
-                                    alt="Product-thumb-Image"
-                                />
-                                </Link>
-                            </div>
+            </div>
 
 
-                            <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                                <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                    <Link to='/product/693'> 
+            {/* product List */}
+            <div className="relative overflow-x-auto mt-5 pb-5 ">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                    <th scope="col" class="px-6 pr-0 py-3" >
+                    <div className="w-[60px]">
+                        <Checkbox {...label} size="small"/>
+                    </div>
+                    </th>
+                    <th scope="col" class="px-2 py-3 whitespace-nowrap">
+                        Product
+                    </th>
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                        Category
+                    </th>
 
-                                    Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                        Sub Category
+                    </th>
 
-                                    </Link>
-                                </h3>
-                                
-                                <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
-                            </div>
-                        </div>
-                    </td>
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                        Price
+                    </th>
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        Watches Boxes
-                    </td>                    
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                        Sales
+                    </th>
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        5 Slots Boxes
-                    </td>
-
-
-                    <td className="px-6 py-2 whitespace-nowrap">
-                        <div class="flex gap-1 flex-col ">
-                            <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                        </div>
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <p className="text-[13px] w-[100px]">
-                            <span className="font-[600]">786</span> sales
-                        </p>
-                        <ProgressBar value={90} type="success" />
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                    </td>
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                        Action
+                    </th>
 
                 </tr>
+                </thead>
+                <tbody>
 
-
-                <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                    <td className="px-6 pr-2 py-2">
-                        <div className="w-[60px]">
-                            <Checkbox {...label} size="small"/>
-                        </div>
-                    </td>
-
-                    <td className="px-2 py-2">
-                        <div className="flex items-center gap-4 w-[300px]">
-                            <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                            <Link to='/product/693'> 
-                                <img
-                                    className="w-full object-cover group-hover:scale-105 transition-all"
-                                    src="/img-products/img-product-3.webp"
-                                    alt="Product-thumb-Image"
-                                />
-                                </Link>
+                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <td className="px-6 pr-2 py-2">
+                            <div className="w-[60px]">
+                                <Checkbox {...label} size="small"/>
                             </div>
+                        </td>
 
-
-                            <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                                <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                    <Link to='/product/693'> 
-
-                                    Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
+                        <td className="px-2 py-2">
+                            <div className="flex items-center gap-4 w-[300px]">
+                                <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                                <Link to='/product/693'> 
+                                    <img
+                                        className="w-full object-cover group-hover:scale-105 transition-all"
+                                        src="/img-products/img-product-3.webp"
+                                        alt="Product-thumb-Image"
+                                    />
                                     </Link>
-                                </h3>
-                                
-                                <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                                </div>
+
+
+                                <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                                    <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                        <Link to='/product/693'> 
+
+                                        Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                        </Link>
+                                    </h3>
+                                    
+                                    <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        Watches Boxes
-                    </td>                    
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            Watches Boxes
+                        </td>                    
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        5 Slots Boxes
-                    </td>
-
-
-                    <td className="px-6 py-2 whitespace-nowrap">
-                        <div class="flex gap-1 flex-col ">
-                            <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                        </div>
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <p className="text-[13px] w-[100px]">
-                            <span className="font-[600]">786</span> sales
-                        </p>
-                        <ProgressBar value={80} type="success" />
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                    </td>
-
-                </tr>
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            5 Slots Boxes
+                        </td>
 
 
-                <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                    <td className="px-6 pr-2 py-2">
-                        <div className="w-[60px]">
-                            <Checkbox {...label} size="small"/>
-                        </div>
-                    </td>
-
-                    <td className="px-2 py-2">
-                        <div className="flex items-center gap-4 w-[300px]">
-                            <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                            <Link to='/product/693'> 
-                                <img
-                                    className="w-full object-cover group-hover:scale-105 transition-all"
-                                    src="/img-products/img-product-3.webp"
-                                    alt="Product-thumb-Image"
-                                />
-                                </Link>
+                        <td className="px-6 py-2 whitespace-nowrap">
+                            <div class="flex gap-1 flex-col ">
+                                <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
                             </div>
+                        </td>
+
+                        <td className="px-6 py-2">
+                            <p className="text-[13px] w-[100px]">
+                                <span className="font-[600]">786</span> sales
+                            </p>
+                            <ProgressBar value={90} type="success" />
+                        </td>
+
+                        <td className="px-6 py-2">
+                            <div className="flex items-center gap-2">
+                                <Tooltip title="Edit Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="View Details" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="Remove Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+                            </div>
+                        </td>
+
+                    </tr>
 
 
-                            <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                                <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                    <Link to='/product/693'> 
+                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <td className="px-6 pr-2 py-2">
+                            <div className="w-[60px]">
+                                <Checkbox {...label} size="small"/>
+                            </div>
+                        </td>
 
-                                    Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
+                        <td className="px-2 py-2">
+                            <div className="flex items-center gap-4 w-[300px]">
+                                <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                                <Link to='/product/693'> 
+                                    <img
+                                        className="w-full object-cover group-hover:scale-105 transition-all"
+                                        src="/img-products/img-product-3.webp"
+                                        alt="Product-thumb-Image"
+                                    />
                                     </Link>
-                                </h3>
-                                
-                                <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                                </div>
+
+
+                                <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                                    <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                        <Link to='/product/693'> 
+
+                                        Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                        </Link>
+                                    </h3>
+                                    
+                                    <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        Watches Boxes
-                    </td>                    
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            Watches Boxes
+                        </td>                    
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        5 Slots Boxes
-                    </td>
-
-
-                    <td className="px-6 py-2 whitespace-nowrap">
-                        <div class="flex gap-1 flex-col ">
-                            <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                        </div>
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <p className="text-[13px] w-[100px]">
-                            <span className="font-[600]">786</span> sales
-                        </p>
-                        <ProgressBar value={50} type="warning" />
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                    </td>
-
-                </tr>
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            5 Slots Boxes
+                        </td>
 
 
-                <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                    <td className="px-6 pr-2 py-2">
-                        <div className="w-[60px]">
-                            <Checkbox {...label} size="small"/>
-                        </div>
-                    </td>
-
-                    <td className="px-2 py-2">
-                        <div className="flex items-center gap-4 w-[300px]">
-                            <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                            <Link to='/product/693'> 
-                                <img
-                                    className="w-full object-cover group-hover:scale-105 transition-all"
-                                    src="/img-products/img-product-3.webp"
-                                    alt="Product-thumb-Image"
-                                />
-                                </Link>
+                        <td className="px-6 py-2 whitespace-nowrap">
+                            <div class="flex gap-1 flex-col ">
+                                <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
                             </div>
+                        </td>
+
+                        <td className="px-6 py-2">
+                            <p className="text-[13px] w-[100px]">
+                                <span className="font-[600]">786</span> sales
+                            </p>
+                            <ProgressBar value={80} type="success" />
+                        </td>
+
+                        <td className="px-6 py-2">
+                            <div className="flex items-center gap-2">
+                                <Tooltip title="Edit Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="View Details" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="Remove Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+                            </div>
+                        </td>
+
+                    </tr>
 
 
-                            <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                                <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                    <Link to='/product/693'> 
+                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <td className="px-6 pr-2 py-2">
+                            <div className="w-[60px]">
+                                <Checkbox {...label} size="small"/>
+                            </div>
+                        </td>
 
-                                    Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
+                        <td className="px-2 py-2">
+                            <div className="flex items-center gap-4 w-[300px]">
+                                <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                                <Link to='/product/693'> 
+                                    <img
+                                        className="w-full object-cover group-hover:scale-105 transition-all"
+                                        src="/img-products/img-product-3.webp"
+                                        alt="Product-thumb-Image"
+                                    />
                                     </Link>
-                                </h3>
-                                
-                                <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                                </div>
+
+
+                                <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                                    <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                        <Link to='/product/693'> 
+
+                                        Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                        </Link>
+                                    </h3>
+                                    
+                                    <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        Watches Boxes
-                    </td>                    
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            Watches Boxes
+                        </td>                    
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        5 Slots Boxes
-                    </td>
-
-
-                    <td className="px-6 py-2 whitespace-nowrap">
-                        <div class="flex gap-1 flex-col ">
-                            <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                        </div>
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <p className="text-[13px] w-[100px]">
-                            <span className="font-[600]">150</span> sales
-                        </p>
-                        <ProgressBar value={20} type="error" />
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                    </td>
-
-                </tr>
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            5 Slots Boxes
+                        </td>
 
 
-                <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                    <td className="px-6 pr-2 py-2">
-                        <div className="w-[60px]">
-                            <Checkbox {...label} size="small"/>
-                        </div>
-                    </td>
-
-                    <td className="px-2 py-2">
-                        <div className="flex items-center gap-4 w-[300px]">
-                            <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
-                            <Link to='/product/693'> 
-                                <img
-                                    className="w-full object-cover group-hover:scale-105 transition-all"
-                                    src="/img-products/img-product-3.webp"
-                                    alt="Product-thumb-Image"
-                                />
-                                </Link>
+                        <td className="px-6 py-2 whitespace-nowrap">
+                            <div class="flex gap-1 flex-col ">
+                                <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
                             </div>
+                        </td>
+
+                        <td className="px-6 py-2">
+                            <p className="text-[13px] w-[100px]">
+                                <span className="font-[600]">786</span> sales
+                            </p>
+                            <ProgressBar value={50} type="warning" />
+                        </td>
+
+                        <td className="px-6 py-2">
+                            <div className="flex items-center gap-2">
+                                <Tooltip title="Edit Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="View Details" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="Remove Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+                            </div>
+                        </td>
+
+                    </tr>
 
 
-                            <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
-                                <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
-                                    <Link to='/product/693'> 
+                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <td className="px-6 pr-2 py-2">
+                            <div className="w-[60px]">
+                                <Checkbox {...label} size="small"/>
+                            </div>
+                        </td>
 
-                                    Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
-
+                        <td className="px-2 py-2">
+                            <div className="flex items-center gap-4 w-[300px]">
+                                <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                                <Link to='/product/693'> 
+                                    <img
+                                        className="w-full object-cover group-hover:scale-105 transition-all"
+                                        src="/img-products/img-product-3.webp"
+                                        alt="Product-thumb-Image"
+                                    />
                                     </Link>
-                                </h3>
-                                
-                                <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                                </div>
+
+
+                                <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                                    <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                        <Link to='/product/693'> 
+
+                                        Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                        </Link>
+                                    </h3>
+                                    
+                                    <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        Watches Boxes
-                    </td>                    
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            Watches Boxes
+                        </td>                    
 
-                    <td className="text-[13px] px-6 py-2 whitespace-nowrap">
-                        5 Slots Boxes
-                    </td>
-
-
-                    <td className="px-6 py-2 whitespace-nowrap">
-                        <div class="flex gap-1 flex-col ">
-                            <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
-                        </div>
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <p className="text-[13px] w-[100px]">
-                            <span className="font-[600]">786</span> sales
-                        </p>
-                        <ProgressBar value={50} type="warning" />
-                    </td>
-
-                    <td className="px-6 py-2">
-                        <div className="flex items-center gap-2">
-                            <Tooltip title="Edit Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <RiEditLine className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="View Details" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <FaRegEye className="!text-[#888] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip title="Remove Product" placement="top"> 
-                                <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
-                                <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
-                                </Button>
-                            </Tooltip>
-                        </div>
-                    </td>
-
-                </tr>
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            5 Slots Boxes
+                        </td>
 
 
+                        <td className="px-6 py-2 whitespace-nowrap">
+                            <div class="flex gap-1 flex-col ">
+                                <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                            </div>
+                        </td>
 
-            </tbody>
-        </table>
-        </div>
+                        <td className="px-6 py-2">
+                            <p className="text-[13px] w-[100px]">
+                                <span className="font-[600]">150</span> sales
+                            </p>
+                            <ProgressBar value={20} type="error" />
+                        </td>
 
-        <div className="flex items-center justify-end pt-4 pb-4 px-4">
-            {/* pagination */}
-            <Pagination count={10} color="primary" />
-        </div>
+                        <td className="px-6 py-2">
+                            <div className="flex items-center gap-2">
+                                <Tooltip title="Edit Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="View Details" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="Remove Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+                            </div>
+                        </td>
+
+                    </tr>
+
+
+                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <td className="px-6 pr-2 py-2">
+                            <div className="w-[60px]">
+                                <Checkbox {...label} size="small"/>
+                            </div>
+                        </td>
+
+                        <td className="px-2 py-2">
+                            <div className="flex items-center gap-4 w-[300px]">
+                                <div className="img w-[65px] h-[65px]  rounded-md overflow-hidden border border-[#ccc] group">
+                                <Link to='/product/693'> 
+                                    <img
+                                        className="w-full object-cover group-hover:scale-105 transition-all"
+                                        src="/img-products/img-product-3.webp"
+                                        alt="Product-thumb-Image"
+                                    />
+                                    </Link>
+                                </div>
+
+
+                                <div className="info w-[75%] text-sm font-[500] text-gray-700 dark:text-gray-200">
+                                    <h3 className="font-[600] text-[12px] leading-4 hover:text-[#1976d2] ">
+                                        <Link to='/product/693'> 
+
+                                        Watch Box and Sunglass Case Holder Organizer with 6 Slots | Watches and 3 Slots for Sunglasses.
+
+                                        </Link>
+                                    </h3>
+                                    
+                                    <span className="text-gray-500 dark:text-gray-400 text-[11px] ">Brand- <span className="text-[#1976d2] font-[600]"> Alawo Watches</span></span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            Watches Boxes
+                        </td>                    
+
+                        <td className="text-[13px] px-6 py-2 whitespace-nowrap">
+                            5 Slots Boxes
+                        </td>
+
+
+                        <td className="px-6 py-2 whitespace-nowrap">
+                            <div class="flex gap-1 flex-col ">
+                                <span className="oldPrice leading-3 line-through text-gray-500 text-[13px]">₹ 3500.00</span><span className="price text-[#1976d2] text-[14px] font-bold ">₹ 1999.00</span>
+                            </div>
+                        </td>
+
+                        <td className="px-6 py-2">
+                            <p className="text-[13px] w-[100px]">
+                                <span className="font-[600]">786</span> sales
+                            </p>
+                            <ProgressBar value={50} type="warning" />
+                        </td>
+
+                        <td className="px-6 py-2">
+                            <div className="flex items-center gap-2">
+                                <Tooltip title="Edit Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <RiEditLine className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="View Details" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <FaRegEye className="!text-[#888] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip title="Remove Product" placement="top"> 
+                                    <Button className="!w-[35px] !h-[35px] !min-w-[35px] bg-[#f1f1f1] !border !border-[#e5e5e5] !rounded-full hover:!bg-[#f1f1f1]">
+                                    <GoTrash className="!text-[#666] !font-[800] !text-[25px] "/>
+                                    </Button>
+                                </Tooltip>
+                            </div>
+                        </td>
+
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+            </div>
+
+            <div className="flex items-center justify-end pt-4 pb-4 px-4">
+                {/* pagination */}
+                <Pagination count={10} color="primary" />
+            </div>
         </div>
 
         <ProductTable2 />
+
+        <LineChartGraph />
+        
 
 
     </>

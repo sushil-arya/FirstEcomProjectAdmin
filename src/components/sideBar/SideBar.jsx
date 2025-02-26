@@ -15,6 +15,8 @@ import { MyContext } from '../../App';
 
 const SideBar = () => {
 
+  
+
   const[subMenuIndex, setSubMenuIndex] = useState(null);
   const isOpenSubMenu=(index)=>{
     if(subMenuIndex===index){
@@ -29,7 +31,7 @@ const SideBar = () => {
 
   return (
     <>
-      <div className={`sidebar fixed top-0 left-0 bg-[#f9f9f9] ${context.isSideBarOpen===true ? 'w-[18%]' : 'w-[0px] opacity-0'} h-full border-r border-[rgba(0,0,0,0.1)] py-2 px-4 transition-all`}>
+      <div className={`sidebar fixed top-0 left-0 bg-[#f9f9f9] ${context.isSideBarOpen===true ? 'w-[18%]' : 'w-[0px] opacity-0'} h-full border-r border-[rgba(0,0,0,0.1)] py-2 px-4`}>
           <div className="py-2 w-full">
             <Link to='/'>
               <img src="/img-logo/alawo_logo.webp" alt="admin_logo" className='w-[120px]'/>

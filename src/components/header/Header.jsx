@@ -16,6 +16,7 @@ import { MyContext } from "../../App";
 
 
 
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     right: -3,
@@ -24,6 +25,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     padding: '0 4px',
   },
 }));
+
 
 
 const Header = () => {
@@ -45,8 +47,16 @@ const Header = () => {
 
       {/* menu button */}
       <div className="part1">
-        <Button className="!w-[40px] !h-[40px] !rounded-full !min-w-[40px] !text-[rgba(0,0,0,0.8)]" onClick={()=>context.setIsSideBarOpen(!context.isSideBarOpen)}>
-          <AiOutlineMenuFold className="text-[18px] text-[rgba(0,0,0,0.8)]" />
+        <Button className="!w-[40px] !h-[40px] !rounded-full !min-w-[40px] !text-[rgba(0,0,0,0.8)]" onClick={() => context.setIsSideBarOpen(!context.isSideBarOpen)}>
+        
+        {
+          !context.isSideBarOpen ? (
+            <AiOutlineMenuUnfold className="text-[22px] font-[600] text-[rgba(0,0,0,0.8)]" />
+          ) : (
+            <AiOutlineMenuFold className="text-[22px] font-[600] text-[rgba(0,0,0,0.8)]" />
+          )
+          // <AiOutlineMenuFold className="text-[18px] text-[rgba(0,0,0,0.8)]" />
+        }
         </Button>
 
       </div>
